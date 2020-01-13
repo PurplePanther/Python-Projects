@@ -1,0 +1,96 @@
+##A SIMPLE ACCOUNTING LEDGER
+import datetime
+
+balance = 0
+
+#enter the date of the entry
+#also make sure date is valid
+isValidDate = False
+while isValidDate == False:
+    try:
+        date = input("Enter the Date (MM/DD/YYYY): ")
+        day, month, year = date.split("/")
+        datetime.datetime(int(year), int(month), int(day))
+        isValidDate = True
+    except ValueError:
+        print("This is not a valid date")
+
+#description=input("Enter a description for this transaction")
+#how to validate this beyond checking for blanks?
+#There's nothing stopping anyone from entering total garbage :(
+
+#Ask the user for their first amount
+#Check if the amount is valid (i.e. an integer or a decimal)
+amountValue = False
+while amountValue == False:
+    try:
+        entry = input("Enter your starting amount: ")
+        firstAmount = float(entry)
+        amountValue = True
+    except ValueError:
+        print("Amount must be an integer or decimal")    
+        
+balance += firstAmount
+print("Date ******** ", date, " ******** Debit ******** $", firstAmount) #description after date
+print (balance)
+print("")
+
+#Assumption: 6 entries
+#Will ask user for number of entries
+entries = 0
+
+while entries<6:
+    
+    #Make sure entry has at least two entries
+    #and second is amount=float
+    rightLength = False
+    floatIndex = False
+    while rightLength == False and floatIndex == False:
+        try:
+            entryType = input("Enter 'C/c' or 'D/d' followed by space followed by amount: ") #C is for credit, D is for debit
+            x = entryType.split(" ")
+            amount = float(x[1])
+            rightLength = True
+            floatIndex = True
+        except IndexError:
+            print("Not enough values entered. Enter 'C/c' or 'D/d' followed by space followed by amount: ")
+        except ValueError:
+            print("Second value must be an integer or decimal")
+    
+    #check for debit entry
+    if x[0] == "D" or x[0] == "d":
+        
+        print("Debit Entry")
+        
+        #description=input("Enter a description for this transaction")
+        #how to validate this beyond checking for blanks?
+        #There's nothing stopping anyone from entering total garbage :(
+        
+        #add the amount to the balance
+        balance += amount
+        
+        print("Date ", date, "Debit ******** $" ,amount)
+        print("Balance $", balance)
+        print("")
+    
+    
+    #Check for credit entry
+    elif x[0]=="C" or x[0]=="c":
+        
+        print("Credit Entry")
+        
+        #description=input("Enter a description for this transaction")
+        #how to validate this beyond checking for blanks?
+        #There's nothing stopping anyone from entering total garbage :(
+        
+        #subtract amount from balance
+        balance-=amount
+        
+        print("Date ******** ", date, "         Credit ******** $", amount)
+        print( "Balance $", balance)
+        print("")
+        
+    else:
+        print("Entry has to start with 'C/c' or 'D/d'")
+    
+    entries+=1
