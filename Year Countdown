@@ -1,0 +1,61 @@
+import time
+
+current_time = time.localtime()
+
+#for testing purposes
+#print(current_time)
+
+#How many days will be in the year?
+yearLength = 0
+
+days = (0,1,2,3,4,5,6)
+dayName = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+months = (1,2,3,4,5,6,7,8,9,10,11,12)
+monthName = ("January","February","March","April","May","June","July","August","September","October","November","December")
+
+
+##check if the current year (current_time.tm_year) is a leap year
+
+leapyear = False
+
+if current_time.tm_year % 4 == 0:
+    leapyear = True
+else:
+    leapyear = False
+
+if current_time.tm_year % 4 == 0 and current_time.tm_year % 100 !=0:
+    leapyear = True
+else:
+    leapyear = False
+
+if current_time.tm_year % 100 == 0 and current_time.tm_year % 400 != 0:
+    leapyear = False
+else:
+    leapyear = True
+
+#if leap year, 366 days in the year; if not, 365
+if leapyear==True:
+    yearLength = 366
+else:
+    yearLength = 365
+
+##*********************************
+
+#days left in the year    
+remaining = yearLength - current_time.tm_yday
+
+#look for what day of the week it is
+for d in range (len(days)):
+    if current_time.tm_wday == days[d]: #current_time.tm_wday is the day of the week
+        day = dayName[d]
+
+#look for what month it is
+for j in range (len(months)):
+    if current_time.tm_mon == months[j]: #current_time.tm_mon is the month
+        month = monthName[j]
+
+#current_time.tm_wday is the day, current_time.tm_mon is the month, current_time.tm_mday is the day in the month
+print("Today is", day, ",", month, current_time.tm_mday, current_time.tm_year, ", the", current_time.tm_yday, "day of the year.") 
+print("")
+print("There are", remaining, "days left in the year.")
