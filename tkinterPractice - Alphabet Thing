@@ -1,0 +1,41 @@
+from tkinter import *
+
+root = Tk()
+
+a = Button(root,text="A")
+a.grid(row=0,column=0)
+
+b=Button(root,text="B")
+b.grid(row=0,column=1)
+
+c=Button(root,text="C")
+c.grid(row=0,column=2)
+
+d=Button(root,text="D")
+d.grid(row=0,column=3)
+
+e=Button(root,text="E")
+e.grid(row=0,column=4)
+
+f=Button(root,text="F")
+f.grid(row=0,column=5)
+
+g=Button(root,text="G")
+g.grid(row=0,column=6)
+
+h=Button(root,text="H")
+h.grid(row=0,column=7)
+
+i=Button(root,text="I")
+i.grid(row=0,column=8)
+
+j=Button(root,text="J")
+j.grid(row=1,column=0)
+
+k=Button(root,text="K")
+k.grid(row=1,column=1)
+
+label = Label(root,text="*")
+label.grid(row=2, column=5)
+
+root.mainloop()
