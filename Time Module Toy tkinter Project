@@ -1,0 +1,23 @@
+from tkinter import *
+import time
+
+root = Tk()
+
+theTime = time.localtime()
+
+def getDay():
+    day=theTime.tm_wday
+    thisDay = Label(root, text=day)
+    thisDay.grid(row=1, column=0)
+    
+def getDate():
+    
+
+whatDay = Button(root, text="What day is it?", command=getDay)
+whatDay.grid(row=0, column=0)
+
+whatDate = Button(root, text="What's today's date?", command=getDate)
+whatDate.grid(row=0, column=1)
+
+
+root.mainloop()
