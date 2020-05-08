@@ -5,12 +5,21 @@ root = Tk()
 
 theTime = time.localtime()
 
+#function that returns the current day
 def getDay():
-    day=theTime.tm_wday
-    thisDay = Label(root, text=day)
+    todayDay=theTime.tm_wday
+    thisDay = Label(root, text=todayDay)
+    
     thisDay.grid(row=1, column=0)
     
 def getDate():
+    day = theTime.tm_wday
+    month = theTime.tm_mon
+    year = theTime.tm_year
+    thisDate = month + "," + day + "," + year
+    todayDate = Label(root, text=thisDate)
+    
+    
     
 
 whatDay = Button(root, text="What day is it?", command=getDay)
