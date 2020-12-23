@@ -89,8 +89,8 @@ while cardPop <= handIndex:
 print("***SEVEN OF HEARTS HAS BEEN PLAYED. HANDS HAVE BEEN ROTATED. BEGIN, PLAYER [0]***")
 
 playableCards = []
-#hardcoded because after 7H has been played, these are the only playables
 
+#after 7H has been played, these are the only playables
 if '7H'in played:
     playableCards.extend(['8H','6H','7C','7D','7S'])
     print ("Playable Cards", playableCards)
@@ -207,7 +207,7 @@ for ii in range (len(playerHands)):
             print("Playable", playableCards)
             while getRidofThis < len(playableCards):
                 if playableCards[getRidofThis] in played:
-                    print("This has now been played", playableCards[getRidofThis])
+                    print("This has now been played", playableCards[getRidofThis]) #for testing purposes
                     
                     #find the index of whichever playable card was played
                     playedIndex = playableCards.index(playableCards[getRidofThis])
@@ -221,7 +221,7 @@ for ii in range (len(playerHands)):
             print("***UPDATING PLAYED CARDS. ADDING NEW PLAYABLE CARDS***")
             print("")
             
-            #check for playable heart cards
+            #Check for playable heart cards
             if '8H' in played and '9H' not in playableCards:    #if 8 of hearts has been played, 9 of hearts becomes playable
                 playableCards.append('9H')
                 
@@ -230,21 +230,15 @@ for ii in range (len(playerHands)):
                 
             if '9H' in played and '10H' not in playableCards:   #if 9 of hearts has been played, 10 of hearts becomes playable
                 playableCards.append('10H')
-            
 
-            #if both 8 of hearts and 7 of clubs have been played, 8 of clubs becomes playable
+            #if 8H has been played, add 8D, 8C, 8S
             if '8H' in played and '7C' in played and '8C' not in playableCards:
                 playableCards.append('8C')
-            
-            #if both 8 of hearts and 7 of spades have been played, 8 of spades becomes playable 
             if '8H' in played and '7S' in played and '8S' not in playableCards:     
                 playableCards.append('8S')  
-            
-            #if both 8 of hearts and 7 of diamonds have been played then 8 of diamonds becomes playable
             if '8H' in played and '7D' in played and '8D' not in playableCards:
                 playableCards.append('8D')
                
-                
             #if 6H has been played add 6D, 6C, 6S
             if '6H' in played and '7C' in played and '6C' not in playableCards:  
                 playableCards.append('6C')
@@ -252,7 +246,7 @@ for ii in range (len(playerHands)):
                 playableCards.append('6D')
             if '6H' in played and '7S' in played and '6S' not in playableCards: 
                 playableCards.append('6S')
-            #NOTE: has to be 'and 6* not in playableCards' or it will add another 6* because 6H, 7C in played would still be true 
+            #NOTE: has to be 'and 6* not in playableCards' or it will add another 6* because 6H, 7C in played would still be true (applies to the rest as well)
                 
                 
             #if 5H has been played add 5D, 5C, 5S
@@ -346,7 +340,7 @@ while x < 2:
 
 #I think I know what's wrong
 #9H got popped off so //'8H' in played and '9H' not in playableCards// became true so it added another 9H
-#Then because if '9H' in played and '10H' not in playableCards: was true it added 10H
+#Then because //if '9H' in played and '10H' not in playableCards:// was true it added 10H
 #if 8 in played and 9 in played and 10 not in playable add 10H
 #Yeah, I need 8 AND 9 BUT NOT 10
 
