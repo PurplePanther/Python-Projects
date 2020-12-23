@@ -1,0 +1,365 @@
+import random
+
+#games=0
+
+    
+hearts = ['5H','6H','7H','8H','9H','10H']
+clubs = ['5C','6C','7C','8C','9C','10C']
+diamonds = ['5D','6D','7D','8D','9D','10D']
+spades = ['5S','6S','7S','8S','9S','10S']
+#for simplicity, only 5-10 is being used. more to come
+
+allCards = hearts + clubs + diamonds + spades
+
+playerHands=[[],[],[],[]] #hard-coded for 4 players :( probably need to do some sort of moodulus, not sure yet how does
+
+#shuffle the cards
+random.shuffle(allCards)
+print("" * 3)
+
+players=['Greg','Lyndsay','Gavin','Jocelyn']    #not quite needed; mostly just needed a length; might fix 
+hands = int(len(allCards) / len(players))
+
+#cards that have been played
+played=[]
+    
+#deal the cards
+index = 0
+while index<(len(playerHands)):
+    playerHands[index].extend(allCards[(hands*index):hands*(index+1)])
+    index+=1
+
+print("" * 2)
+print("Hands", playerHands)
+print("" * 2)
+
+i = 0
+cardRotate = 0 #used to determine which player's turn it is
+cardPop = 0 
+
+#heartsPlayed=[]
+
+##IMPORTANT! 7 OF HEARTS MUST BE PLAYED FIRST
+
+#7 of hearts plays first; look for where it is
+while i < (len(playerHands)):
+    if '7H' in playerHands[i]:
+        whereSevenHearts=playerHands[i].index('7H')     #index of 7H, in hand holding the 7 of hearts
+        
+        #hand containing 7H
+        handWithSeven = playerHands[i]
+        
+        #index of hand holding 7H; rotate by this many hands
+        handIndex=playerHands.index(handWithSeven)
+        
+        print("Index of Hand with Seven of Hearts", handIndex)
+        print("")
+        print ("Who has the Seven of Hearts?", handWithSeven)
+        print("")
+        print ("Where's the Seven of Hearts? Index:", whereSevenHearts)
+        print("")
+        print("PLAY SEVEN OF HEARTS")
+        played.append(playerHands[handIndex][whereSevenHearts])
+        
+        #7H has been played; remove from player's hand
+        playerHands[i].pop(whereSevenHearts)
+    i+=1
+    
+print("")
+print("Hands", playerHands)
+print("")
+print("Played", played)   
+print("")
+print("*" * 9)
+print("" * 2)
+    
+##HANDS NEED TO BE ROTATED SO THAT PLAYER AFTER 7H IS FIRST (e.g. IF PLAYER 3 PLAYS 7H, HANDS NEED TO BE ROTATED SO THAT PLAYER 4 IS FIRST (i.e. index 0)
+    
+while cardPop <= handIndex:
+    makeLast=playerHands.pop(0) #take first element off
+    #print("Put this on the end", makeLast)
+    print("")
+    playerHands.append(makeLast)   #adds last element to end of playerHands
+    print ("New Order", playerHands)
+    print("")
+    print("")
+    cardPop+=1
+
+##ACTUALLY BEGIN
+print("***SEVEN OF HEARTS HAS BEEN PLAYED. HANDS HAVE BEEN ROTATED. BEGIN, PLAYER [0]***")
+
+playableCards = []
+#hardcoded because after 7H has been played, these are the only playables
+
+if '7H'in played:
+    playableCards.extend(['8H','6H','7C','7D','7S'])
+    print ("Playable Cards", playableCards)
+    print ("played", played)
+
+print("" * 3)
+
+ii = 0
+
+for ii in range (len(playerHands)):
+    while len(playerHands[ii]) != 0:
+        while cardRotate < len(playerHands):
+            print("Round in Play", playerHands)
+            print("" * 2)
+            makeLast=playerHands.pop(0)     #pops first element
+            print("Current Player:", makeLast)
+                
+            lookingFor=0
+            keepThis=[] #make list for cards to keep, 
+            
+            #loop through the playable cards
+            print("Can be Played", playableCards)
+            print("")
+            
+            while lookingFor<len(playableCards):
+                #if a playable card is in the current player's hand, add it to keep list
+                if playableCards[lookingFor] in makeLast: 
+                    print("Yay! There's a", playableCards[lookingFor], "in this hand!")
+                    
+                    #index of the playable card; this will be popped off for now
+                    p = makeLast.index(playableCards[lookingFor])    
+                    print(p)    
+                    makeLast.pop(p)
+                    keepThis.append(playableCards[lookingFor])      #put the kept card in the keeping hand
+                    print("Keeping", keepThis)
+                    print("")
+                    print("Updated Hand", makeLast) #This is the hand without the kept card(s)
+                    print ("")
+                    
+                else:
+                    print("Boo! There is no", playableCards[lookingFor], "in this hand!")
+                    print("")
+                lookingFor+=1  
+                
+            print("Keeping These:", keepThis)
+            print("")
+            
+            #If there's more than one keepable card, play one
+            if len(keepThis)>1:
+                print("More than one card can be played")
+                print("")
+                
+                #Pop the first playable card
+                #A BIT NAIVE AT THIS POINT: ONLY SET TO POP INDEX 0 (i.e. first card)
+                playFirst=keepThis.pop(0)
+                
+                #Add it to the cards that have been played
+                played.append(playFirst)   
+                
+                #Add remaining kept cards back to player's hand
+                remaining=0
+                while remaining<len(keepThis):
+                    playFirst=keepThis[remaining]
+                    #print(playFirst)
+                    makeLast.append(playFirst)
+                    remaining+=1
+                
+                #print whatever kept cards remain
+                print("Remaining Kept Cards:", keepThis) 
+                    
+                #print the player's final hand at the end of their turn
+                print("Final Hand:", makeLast)
+                print("")
+                print("*****END OF TURN*****")
+                print("" * 3)
+            
+            #If only one playable card in hand, play it    
+            elif len(keepThis)==1:
+                print("Only one card can be played")
+                
+                playOnly=keepThis.pop(0)
+                
+                #Add it to the cards that have been played
+                played.append(playOnly) 
+                
+                #print whatever kept cards remain
+                print(keepThis) 
+                
+                #print the player's final hand at the end of their turn
+                print("Final Hand", makeLast)
+                print("")
+                print("***END OF TURN***")
+                print("")
+                print("")
+                print("")
+                    
+            else:
+                print("No cards can be played :(")
+                
+                #GET A CARD FROM THE PREVIOUS PLAYER
+                #A BIT NAIVE AT THIS POINT: ONLY SET TO POP INDEX 2
+                passCard = playerHands[-1].pop(2)  #Example: pops index 2 of last hand index
+                print("Previous Player Passes:", passCard)
+                
+                #Add this card to the current player's hand
+                makeLast.append(passCard)
+                print("***END OF TURN***")
+                print("")
+                print("")
+                print("")
+            
+            #GETTING RID OF PLAYABLE CARDS THAT HAVE BEEN PLAYED
+            getRidofThis=0
+            print("Playable", playableCards)
+            while getRidofThis < len(playableCards):
+                if playableCards[getRidofThis] in played:
+                    print("This has now been played", playableCards[getRidofThis])
+                    
+                    #find the index of whichever playable card was played
+                    playedIndex = playableCards.index(playableCards[getRidofThis])
+                    print(playedIndex)
+                    playableCards.pop(playedIndex)  #remove it from the playable cards
+                getRidofThis+=1
+            
+            #How to add new playable cards?
+            #check played cards
+            print("")
+            print("***UPDATING PLAYED CARDS. ADDING NEW PLAYABLE CARDS***")
+            print("")
+            
+            #check for playable heart cards
+            if '8H' in played and '9H' not in playableCards:    #if 8 of hearts has been played, 9 of hearts becomes playable
+                playableCards.append('9H')
+                
+            if '6H' in played and '5H' not in playableCards:    #if 6 of hearts has been played, 5 of hearts becomes playable
+                playableCards.append('5H')
+                
+            if '9H' in played and '10H' not in playableCards:   #if 9 of hearts has been played, 10 of hearts becomes playable
+                playableCards.append('10H')
+            
+
+            #if both 8 of hearts and 7 of clubs have been played, 8 of clubs becomes playable
+            if '8H' in played and '7C' in played and '8C' not in playableCards:
+                playableCards.append('8C')
+            
+            #if both 8 of hearts and 7 of spades have been played, 8 of spades becomes playable 
+            if '8H' in played and '7S' in played and '8S' not in playableCards:     
+                playableCards.append('8S')  
+            
+            #if both 8 of hearts and 7 of diamonds have been played then 8 of diamonds becomes playable
+            if '8H' in played and '7D' in played and '8D' not in playableCards:
+                playableCards.append('8D')
+               
+                
+            #if 6H has been played add 6D, 6C, 6S
+            if '6H' in played and '7C' in played and '6C' not in playableCards:  
+                playableCards.append('6C')
+            if '6H' in played and '7D' in played and '6D' not in playableCards:
+                playableCards.append('6D')
+            if '6H' in played and '7S' in played and '6S' not in playableCards: 
+                playableCards.append('6S')
+            #NOTE: has to be 'and 6* not in playableCards' or it will add another 6* because 6H, 7C in played would still be true 
+                
+                
+            #if 5H has been played add 5D, 5C, 5S
+            if '5H' in played and '6C' in played and '5C' not in playableCards:  
+                playableCards.append('5C')
+            if '5H' in played and '6D' in played and '5D' not in playableCards:
+                playableCards.append('5D')
+            if '5H' in played and '6S' in played and '5S' not in playableCards: 
+                playableCards.append('5S')    
+                
+            #if 9H has been played add 9D, 9C, 9S
+            if '9H' in played and '8C' in played and '9C' not in playableCards:  
+                playableCards.append('9C')
+            if '9H' in played and '8D' in played and '9D' not in playableCards:
+                playableCards.append('9D')
+            if '9H' in played and '8S' in played and '9S' not in playableCards: 
+                playableCards.append('9S')
+            
+            #if 10H has been played add 10D, 10C, 10S
+            if '10H' in played and '9C' in played and '10C' not in playableCards:  
+                playableCards.append('10C')
+            if '10H' in played and '9D' in played and '10D' not in playableCards:
+                playableCards.append('9D')
+            if '10H' in played and '9S' in played and '10S' not in playableCards: 
+                playableCards.append('10S')
+                
+                
+            print("Played", played)
+            print("Playable", playableCards)
+            print("")
+            print("*" * 5)
+            playerHands.append(makeLast)   #adds last element to end of playerHands (current player's round is over)
+            cardRotate+=1
+            print("")
+        
+            """if playableCards==[]:
+                print ("No more playable cards")
+                break"""
+        
+            #If 5 of hearts is played do what?
+
+
+##FOR REFERENCE
+#pop() needs an index, need to pop index 0 and 1
+
+   
+#playable = 6H, 8H or any 7
+
+
+"""x=0
+
+while x < 2:
+
+    print('')
+    print('')
+    passRight.append(hearts[0])
+    print("Pass Right: ", passRight)
+    print('')
+    print('')
+    hearts.pop(0)
+    
+    #print("A",a)
+    print('')
+    print("hearts",hearts)
+    
+    #clubs.pop(0)
+    
+    clubs.append(passRight[0])
+    #print(hearts)
+    print("Clubs", clubs)
+    
+    passRight.pop(0)
+    print("Pass Right: ", passRight)
+    
+    passLeft.append(clubs[0])
+    print("Pass Left: ", passLeft)
+    
+    clubs.pop(0)
+    
+    hearts.append(passLeft[0])
+    print("hearts",hearts)
+    
+    print("clubs ",clubs)
+
+    x+=1"""
+
+#this has nothing to do with anything
+#np.arange(-10,10)
+
+#Why are things being duplicated on the last turn?
+
+#I think I know what's wrong
+#9H got popped off so //'8H' in played and '9H' not in playableCards// became true so it added another 9H
+#Then because if '9H' in played and '10H' not in playableCards: was true it added 10H
+#if 8 in played and 9 in played and 10 not in playable add 10H
+#Yeah, I need 8 AND 9 BUT NOT 10
+
+#How to check if suit is done? What happens after 10 or 5?
+
+#if 8c/s/d in played and 9d not in playables append 9c/s/d
+
+#How to check if all 
+
+#i need to wrap back to first index once all plays are over
+
+##on dealing the cards
+#if len(allCards) % len(playerHands != 0:
+    #first player gets the len(allCards) % len(playerHands remaining cards
+    #need to wrap around to start of player list and give player the 52 % 5 remaining cards
+    #how to wrap back around to the first index?
