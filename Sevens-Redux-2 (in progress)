@@ -357,3 +357,15 @@ while x < 2:
     #first player gets the len(allCards) % len(playerHands remaining cards
     #need to wrap around to start of player list and give player the 52 % 5 remaining cards
     #how to wrap back around to the first index?
+
+##SOLVED
+#array[-x:] = start from xth-last element, go to end
+#reverse of x[0:] which is start at 0 and go to end
+#NOTE: e.g. [-5:-1] starts at 5th-last, goes to second-last
+#index number vs order number: 5th last value is 4th last index
+
+mod = len(allCards) % len(players)
+print("M:", mod) #player 1 needs this number of cards added to their hand
+
+#based on all that
+playerHands[0].extend(allCards[-mod:]) #from mod to the end
