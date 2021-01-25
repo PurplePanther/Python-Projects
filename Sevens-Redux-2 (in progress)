@@ -11,7 +11,7 @@ spades = ['5S','6S','7S','8S','9S','10S']
 
 allCards = hearts + clubs + diamonds + spades
 
-playerHands=[[],[],[],[]] #hard-coded for 4 players :( probably need to do some sort of moodulus, not sure yet how does
+playerHands = [[],[],[],[]] #hard-coded for 4 players
 
 #shuffle the cards
 random.shuffle(allCards)
@@ -20,14 +20,28 @@ print("" * 3)
 players=['Greg','Lyndsay','Gavin','Jocelyn']    #not quite needed; mostly just needed a length; might fix 
 hands = int(len(allCards) / len(players))
 
+#if length of allCards isn't divisible by # of players, need to wrap around to start of player list and deal out any remaining cards
+mod = len(allCards) % len(players) #remainder i.e. # of leftover cards
+
+#NOTE: CHANGE NAME OF MODD LATER
+modd = allCards[-mod:] #takes the last (mod)th elements in the array
+print("Leftover Cards: ", modd)
+
 #cards that have been played
-played=[]
+played = []
     
 #deal the cards
 index = 0
 while index<(len(playerHands)):
     playerHands[index].extend(allCards[(hands*index):hands*(index+1)])
     index+=1
+
+#deal the extra cards
+'''modIndex = 0
+if mod != 0:
+    while index2<(len(modd)):
+        playerHands[modIndex].append(modd[modIndex])
+        modIndex += 1'''
 
 print("" * 2)
 print("Hands", playerHands)
