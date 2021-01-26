@@ -17,7 +17,7 @@ playerHands = [[],[],[],[]] #hard-coded for 4 players
 random.shuffle(allCards)
 print("" * 3)
 
-players=['Greg','Lyndsay','Gavin','Jocelyn']    #not quite needed; mostly just needed a length; might fix 
+players = ['Greg','Lyndsay','Gavin','Jocelyn']    #not quite needed; mostly just needed a length; might fix 
 hands = int(len(allCards) / len(players))
 
 #if length of allCards isn't divisible by # of players, need to wrap around to start of player list and deal out any remaining cards
@@ -34,14 +34,14 @@ played = []
 index = 0
 while index<(len(playerHands)):
     playerHands[index].extend(allCards[(hands*index):hands*(index+1)])
-    index+=1
+    index +=1
 
 #deal any extra cards
 '''modIndex = 0
 if mod != 0:
     while index2<(len(modd)):
         playerHands[modIndex].append(modd[modIndex])
-        modIndex += 1'''
+        modIndex +=1'''
 
 print("" * 2)
 print("Hands", playerHands)
@@ -77,7 +77,7 @@ while i < (len(playerHands)):
         
         #7H has been played; remove from player's hand
         playerHands[i].pop(whereSevenHearts)
-    i+=1
+    i +=1
     
 print("")
 print("Hands", playerHands)
@@ -95,9 +95,8 @@ while cardPop <= handIndex:
     print("")
     playerHands.append(makeLast)   #adds last element to end of playerHands
     print ("New Order", playerHands)
-    print("")
-    print("")
-    cardPop+=1
+    print("" * 2)
+    cardPop +=1
 
 ##ACTUALLY BEGIN
 print("***SEVEN OF HEARTS HAS BEEN PLAYED. HANDS HAVE BEEN ROTATED. BEGIN, PLAYER [0]***")
@@ -123,13 +122,13 @@ for ii in range (len(playerHands)):
             print("Current Player:", makeLast)
                 
             lookingFor = 0
-            keepThis=[] #make list for cards to keep, 
+            keepThis = [] #make list for cards to keep, 
             
             #loop through the playable cards
             print("Can be Played", playableCards)
             print("")
             
-            while lookingFor<len(playableCards):
+            while lookingFor < len(playableCards):
                 #if a playable card is in the current player's hand, add it to keep list
                 if playableCards[lookingFor] in makeLast: 
                     print("Yay! There's a", playableCards[lookingFor], "in this hand!")
@@ -153,7 +152,7 @@ for ii in range (len(playerHands)):
             print("")
             
             #If there's more than one keepable card, play one
-            if len(keepThis)>1:
+            if len(keepThis) > 1:
                 print("More than one card can be played")
                 print("")
                 
@@ -166,8 +165,8 @@ for ii in range (len(playerHands)):
                 
                 #Add remaining kept cards back to player's hand
                 remaining = 0
-                while remaining<len(keepThis):
-                    playFirst=keepThis[remaining]
+                while remaining < len(keepThis):
+                    playFirst = keepThis[remaining]
                     #print(playFirst)
                     makeLast.append(playFirst)
                     remaining +=1
@@ -182,7 +181,7 @@ for ii in range (len(playerHands)):
                 print("" * 3)
             
             #If only one playable card in hand, play it    
-            elif len(keepThis)==1:
+            elif len(keepThis) == 1:
                 print("Only one card can be played")
                 
                 playOnly = keepThis.pop(0)
@@ -197,9 +196,7 @@ for ii in range (len(playerHands)):
                 print("Final Hand", makeLast)
                 print("")
                 print("***END OF TURN***")
-                print("")
-                print("")
-                print("")
+                print("" * 3)
                     
             else:
                 print("No cards can be played :(")
@@ -212,9 +209,7 @@ for ii in range (len(playerHands)):
                 #Add this card to the current player's hand
                 makeLast.append(passCard)
                 print("***END OF TURN***")
-                print("")
-                print("")
-                print("")
+                print("" * 3)
             
             #GETTING RID OF PLAYABLE CARDS THAT HAVE BEEN PLAYED
             getRidofThis=0
@@ -227,7 +222,7 @@ for ii in range (len(playerHands)):
                     playedIndex = playableCards.index(playableCards[getRidofThis])
                     print(playedIndex)
                     playableCards.pop(playedIndex)  #remove it from the playable cards
-                getRidofThis+=1
+                getRidofThis +=1
             
             #How to add new playable cards?
             #check played cards
