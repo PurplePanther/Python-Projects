@@ -36,7 +36,7 @@ while index<(len(playerHands)):
     playerHands[index].extend(allCards[(hands*index):hands*(index+1)])
     index+=1
 
-#deal the extra cards
+#deal any extra cards
 '''modIndex = 0
 if mod != 0:
     while index2<(len(modd)):
@@ -58,7 +58,7 @@ cardPop = 0
 #7 of hearts plays first; look for where it is
 while i < (len(playerHands)):
     if '7H' in playerHands[i]:
-        whereSevenHearts=playerHands[i].index('7H')     #index of 7H, in hand holding the 7 of hearts
+        whereSevenHearts = playerHands[i].index('7H')     #index of 7H, in hand holding the 7 of hearts
         
         #hand containing 7H
         handWithSeven = playerHands[i]
@@ -90,7 +90,7 @@ print("" * 2)
 ##HANDS NEED TO BE ROTATED SO THAT PLAYER AFTER 7H IS FIRST (e.g. IF PLAYER 3 PLAYS 7H, HANDS NEED TO BE ROTATED SO THAT PLAYER 4 IS FIRST (i.e. index 0)
     
 while cardPop <= handIndex:
-    makeLast=playerHands.pop(0) #take first element off
+    makeLast = playerHands.pop(0) #take first element off
     #print("Put this on the end", makeLast)
     print("")
     playerHands.append(makeLast)   #adds last element to end of playerHands
@@ -122,7 +122,7 @@ for ii in range (len(playerHands)):
             makeLast=playerHands.pop(0)     #pops first element
             print("Current Player:", makeLast)
                 
-            lookingFor=0
+            lookingFor = 0
             keepThis=[] #make list for cards to keep, 
             
             #loop through the playable cards
@@ -147,7 +147,7 @@ for ii in range (len(playerHands)):
                 else:
                     print("Boo! There is no", playableCards[lookingFor], "in this hand!")
                     print("")
-                lookingFor+=1  
+                lookingFor +=1  
                 
             print("Keeping These:", keepThis)
             print("")
@@ -159,18 +159,18 @@ for ii in range (len(playerHands)):
                 
                 #Pop the first playable card
                 #A BIT NAIVE AT THIS POINT: ONLY SET TO POP INDEX 0 (i.e. first card)
-                playFirst=keepThis.pop(0)
+                playFirst = keepThis.pop(0)
                 
                 #Add it to the cards that have been played
                 played.append(playFirst)   
                 
                 #Add remaining kept cards back to player's hand
-                remaining=0
+                remaining = 0
                 while remaining<len(keepThis):
                     playFirst=keepThis[remaining]
                     #print(playFirst)
                     makeLast.append(playFirst)
-                    remaining+=1
+                    remaining +=1
                 
                 #print whatever kept cards remain
                 print("Remaining Kept Cards:", keepThis) 
@@ -185,7 +185,7 @@ for ii in range (len(playerHands)):
             elif len(keepThis)==1:
                 print("Only one card can be played")
                 
-                playOnly=keepThis.pop(0)
+                playOnly = keepThis.pop(0)
                 
                 #Add it to the cards that have been played
                 played.append(playOnly) 
@@ -293,7 +293,7 @@ for ii in range (len(playerHands)):
             print("")
             print("*" * 5)
             playerHands.append(makeLast)   #adds last element to end of playerHands (current player's round is over)
-            cardRotate+=1
+            cardRotate +=1
             print("")
         
             """if playableCards==[]:
@@ -308,44 +308,6 @@ for ii in range (len(playerHands)):
 
    
 #playable = 6H, 8H or any 7
-
-
-"""x=0
-
-while x < 2:
-
-    print('')
-    print('')
-    passRight.append(hearts[0])
-    print("Pass Right: ", passRight)
-    print('')
-    print('')
-    hearts.pop(0)
-    
-    #print("A",a)
-    print('')
-    print("hearts",hearts)
-    
-    #clubs.pop(0)
-    
-    clubs.append(passRight[0])
-    #print(hearts)
-    print("Clubs", clubs)
-    
-    passRight.pop(0)
-    print("Pass Right: ", passRight)
-    
-    passLeft.append(clubs[0])
-    print("Pass Left: ", passLeft)
-    
-    clubs.pop(0)
-    
-    hearts.append(passLeft[0])
-    print("hearts",hearts)
-    
-    print("clubs ",clubs)
-
-    x+=1"""
 
 #this has nothing to do with anything
 #np.arange(-10,10)
@@ -372,14 +334,10 @@ while x < 2:
     #need to wrap around to start of player list and give player the 52 % 5 remaining cards
     #how to wrap back around to the first index?
 
-##SOLVED
+##PIECES
 #array[-x:] = start from xth-last element, go to end
 #reverse of x[0:] which is start at 0 and go to end
 #NOTE: e.g. [-5:-1] starts at 5th-last, goes to second-last
 #index number vs order number: 5th last value is 4th last index
 
 mod = len(allCards) % len(players)
-print("M:", mod) #player 1 needs this number of cards added to their hand
-
-#based on all that
-playerHands[0].extend(allCards[-mod:]) #from mod to the end
