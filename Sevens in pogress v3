@@ -120,6 +120,9 @@ if '7H'in played:
 
 print("" * 3)
 
+## something has to happen on this line: while cardRotate < what? len(allCards)? wait a min...
+
+##FOUND OUT: LEN(allCards) DOES WORK BUT EVENTUALLY GET TO A POINT WHERE SOMEONE'S HAND HAS NO INDEX 2 TO POP
 i = 0
 for i in range (len(playerHands)):
     while len(playerHands[i]) != 0:
@@ -330,8 +333,14 @@ for i in range (len(playerHands)):
                 playableCards.append('10S')
                 
                 
-            print("Played", played)
-            print("Playable", playableCards)
+            print("PLAYED CARDS:", played)
+            print("")
+            print ("Hearts: ", heartsPlayed)
+            print ("Clubs: ", clubsPlayed)
+            print ("Spades: ", spadesPlayed)
+            print ("Diamonds: ", diamondsPlayed)
+            print("")
+            print("PLAYABLE CARDS:", playableCards)
             print("")
             print("*" * 5)
             playerHands.append(makeLast)   #adds last element to end of playerHands (current player's round is over)
