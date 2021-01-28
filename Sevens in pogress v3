@@ -20,6 +20,13 @@ print("" * 3)
 players=['Greg','Lyndsay','Gavin','Jocelyn']    #not quite needed; mostly just needed a length; might fix 
 hands = int(len(allCards) / len(players))
 
+#if length of allCards isn't divisible by # of players, need to wrap around to start of player list and deal out any remaining cards
+mod = len(allCards) % len(players) #remainder i.e. # of leftover cards
+
+#NOTE: CHANGE NAME OF MODD LATER
+modd = allCards[-mod:] #takes the last (mod)th elements in the array
+#print("Leftover Cards: ", modd) #for testing purposes
+
 #cards that have been played
 played=[]
     
@@ -28,6 +35,13 @@ index = 0
 while index<(len(playerHands)):
     playerHands[index].extend(allCards[(hands*index):hands*(index+1)])
     index+=1
+
+#deal any extra cards
+modIndex = 0
+if mod != 0:
+    while modIndex<(len(modd)):
+        playerHands[modIndex].append(modd[modIndex])
+        modIndex +=1
 
 print("" * 2)
 print("Hands", playerHands)
@@ -107,7 +121,6 @@ if '7H'in played:
 print("" * 3)
 
 i = 0
-
 for i in range (len(playerHands)):
     while len(playerHands[i]) != 0:
         while cardRotate < len(playerHands):
@@ -130,9 +143,8 @@ for i in range (len(playerHands)):
                     
                     #index of the playable card; this will be popped off for now
                     p = makeLast.index(playableCards[lookingFor])    
-                    #print(p)    
                     makeLast.pop(p)
-                    keepThis.append(playableCards[lookingFor])      #put the kept card in the keeping hand
+                    keepThis.append(playableCards[lookingFor]) #put the kept card in the keeping hand
                     print("Keeping", keepThis)
                     print("")
                     print("Updated Hand", makeLast) #This is the hand without the kept card(s)
@@ -148,7 +160,7 @@ for i in range (len(playerHands)):
             
             #If there's more than one keepable card, play one
             if len(keepThis)>1:
-                print("More than one card can be played")
+                print("***MORE THAN ONE CARD CAN BE PLAYED***")
                 print("")
                 
                 #Pop the first playable card
@@ -192,7 +204,7 @@ for i in range (len(playerHands)):
             
             #If only one playable card in hand, play it    
             elif len(keepThis)==1:
-                print("Only one card can be played")
+                print("***ONLY ONE CARD CAN BE PLAYED***")
                 
                 playOnly=keepThis.pop(0)
                 
@@ -224,7 +236,7 @@ for i in range (len(playerHands)):
                 print("" * 3)
                     
             else:
-                print("No cards can be played :(")
+                print("*** NO CARDS CAN BE PLAYED :(***")
                 
                 #GET A CARD FROM THE PREVIOUS PLAYER
                 #A BIT NAIVE AT THIS POINT: ONLY SET TO POP INDEX 2
@@ -246,7 +258,6 @@ for i in range (len(playerHands)):
             print("Playable", playableCards)
             while getRidofThis < len(playableCards):
                 if playableCards[getRidofThis] in played:
-                    #print("This has now been played", playableCards[getRidofThis]) #for testing purposes
                     
                     #find the index of whichever playable card was played
                     playedIndex = playableCards.index(playableCards[getRidofThis])
@@ -330,19 +341,10 @@ for i in range (len(playerHands)):
             """if playableCards==[]:
                 print ("No more playable cards")
                 break"""
-        
-            #If 5 of hearts is played do what?
 
 
 ##FOR REFERENCE
 #pop() needs an index, need to pop index 0 and 1
-
-   
-#playable = 6H, 8H or any 7
-
-
-"""x=0
-
 
 #this has nothing to do with anything
 #np.arange(-10,10)
@@ -357,14 +359,18 @@ for i in range (len(playerHands)):
 
 #How to check if suit is done? What happens after 10 or 5?
 
-#if 8c/s/d in played and 9d not in playables append 9c/s/d
-
 #How to check if all 
 
 #i need to wrap back to first index once all plays are over
+#how does?
 
 ##on dealing the cards
 #if len(allCards) % len(playerHands != 0:
-    #first player gets the len(allCards) % len(playerHands remaining cards
-    #need to wrap around to start of player list and give player the 52 % 5 remaining cards
+    #need to wrap around to start of player list and give players the 24 % players remaining cards
     #how to wrap back around to the first index?
+    
+##STUFF FOUND OUT
+#array[-x:] = start from xth-last element, go to end
+#reverse of x[0:] which is start at 0 and go to end
+#NOTE: e.g. [-5:-1] starts at 5th-last, goes to second-last
+#index number vs order number: 5th last value is 4th last index
