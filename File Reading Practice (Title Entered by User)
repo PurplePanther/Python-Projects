@@ -1,0 +1,14 @@
+import os
+
+fileName=str(input("enter file name: "))
+fileName+=".txt"
+print(fileName)
+
+try:
+    with open(fileName, "r") as file:
+        stuff=file.read()
+        print(stuff)
+except FileNotFoundError:
+    print(fileName, "does not exist")
+    
+#how do I add '../' when it's needed? It doesn't make sense to have this file in every folder
