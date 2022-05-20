@@ -1,0 +1,25 @@
+##PRACTICE FOR WRITING CONTENT TO A FILE
+
+entry=""
+fileContent=""
+
+try:
+    f = open("NewLinePractice.txt", "a") #create the file; a = append = add more content to end of file
+    
+    while entry != "*":
+        entry = input("enter a this (enter '*' when you're done making entries') ")
+        fileContent += entry
+        fileContent += "\n" #adds a new line ("presses Enter key")
+        
+        if entry == "*":
+            print("Done")
+            f.write(fileContent)
+            f.close() 
+
+except:
+    print("Oops! Something has gone wrong! Make sure to check your code! :(")
+#oh, how to show what line the error is on?
+
+
+#Why does IndentationError not work in 'except'?
+#Looked up: IndentationEror is run at compile time, try-except is run at run time
