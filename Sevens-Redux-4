@@ -8,7 +8,7 @@ hearts = ['4H','5H','6H','7H','8H','9H','10H']
 clubs = ['4C','5C','6C','7C','8C','9C','10C']
 diamonds = ['4D','5D','6D','7D','8D','9D','10D']
 spades = ['4S','5S','6S','7S','8S','9S','10S']
-#for simplicity, only 5-10 is being used. more to come
+#for simplicity, only 4-10 is being used. more to come
 
 allCards = hearts + clubs + diamonds + spades
 
@@ -26,7 +26,6 @@ mod = len(allCards) % len(players) #remainder i.e. # of leftover cards
 
 #NOTE: CHANGE NAME OF MODD LATER
 modd = allCards[-mod:] #takes the last (mod)th elements in the array
-#print("Leftover Cards: ", modd) #for testing purposes
 
 #cards that have been playedCards
 playedCards = []
@@ -103,11 +102,7 @@ print("")
     
 while cardPop <= handIndex:
     makeLast = playerHands.pop(0) #take first element off
-    #print("Put this on the end", makeLast)
-    #print("")
     playerHands.append(makeLast)   #adds last element to end of playerHands
-    #print ("New Order", playerHands)    #for testing if rotation is working correctly
-    #print("" * 2)
     cardPop +=1
 
 ##7 OF HEARTS HAS BEEN PLAYED. CONTINUE, PLAYER 2.
