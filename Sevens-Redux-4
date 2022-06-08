@@ -435,6 +435,7 @@ for i in range (len(playerHands)):
 #is this version working? It was being weird
 #ah, I know what's wrong. In the case I ran, it appended because 6S was in playedCards
 #if any one 6 has been played it will append
+#of course
 '''sixes = ['6C', '6D', '6S']
 fives = ['5C', '5D', '5S']
 
