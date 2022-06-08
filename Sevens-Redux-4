@@ -428,7 +428,27 @@ for i in range (len(playerHands)):
     #need to wrap around to start of player list and give players the 24 % players remaining cards
     #how to wrap back around to the first index?'''
 #figured out
-    
+
+##ON ADDING CARDS
+#if 5H has been playedCards add 5D, 5C, 5S
+
+#is this version working? It was being weird
+#ah, I know what's wrong. In the case I ran, it appended because 6S was in playedCards
+#if any one 6 has been played it will append
+'''sixes = ['6C', '6D', '6S']
+fives = ['5C', '5D', '5S']
+
+for ss in sixes:
+    for ff in fives:
+        if '5H' in playedCards and ss in playedCards and ff not in playableCards: 
+            playableCards.append(ff)'''
+            
+#if 5H played and 6C played
+#if 5H played and 6D played
+#if 5H played and 6S played
+
+#loops through the fives and appends them in order
+
 ##STUFF FOUND OUT
 '''#array[-x:] = start from xth-last element, go to end
 #reverse of x[0:] which is start at 0 and go to end
