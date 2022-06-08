@@ -339,7 +339,7 @@ for i in range (len(playerHands)):
             if '10H' in playedCards and '9C' in playedCards and '10C' not in playableCards:  
                 playableCards.append('10C')
             if '10H' in playedCards and '9D' in playedCards and '10D' not in playableCards:
-                playableCards.append('9D')
+                playableCards.append('10D')
             if '10H' in playedCards and '9S' in playedCards and '10S' not in playableCards: 
                 playableCards.append('10S')
             
