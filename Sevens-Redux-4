@@ -375,9 +375,16 @@ for i in range (len(playerHands)):
                     playableCards.remove(s)
                     
             fives = ['5D', '5S', '5C']
-            for f in fives:
-                if f in playedCards:
-                    playableCards.remove(f)
+            for fi in fives:
+                if fi in playedCards:
+                    playableCards.remove(fi)
+                    
+            fours = ['4D', '4S', '4C']
+            for fo in fours:
+                if fo in playedCards:
+                    playableCards.remove(fo)
+                    
+            
                 
             print("PLAYED CARDS:", playedCards)
             print("")
