@@ -22,10 +22,10 @@ players = ['Greg','Lyndsay','Gavin','Jocelyn']    #not quite needed; mostly just
 hands = int(len(allCards) / len(players))
 
 #if length of allCards isn't divisible by # of players, need to wrap around to start of player list and deal out any remaining cards
-mod = len(allCards) % len(players) #remainder i.e. # of leftover cards
+modCards = len(allCards) % len(players) #remainder i.e. # of leftover cards
 
 #NOTE: CHANGE NAME OF MODD LATER
-modd = allCards[-mod:] #takes the last (mod)th elements in the array
+modd = allCards[-modCards:] #takes the last (mod)th cards in the allCards
 
 #cards that have been playedCards
 playedCards = []
@@ -38,7 +38,7 @@ while index<(len(playerHands)):
 
 #deal any extra cards
 modIndex = 0
-if mod != 0:
+if modCards != 0:
     while modIndex<(len(modd)):
         playerHands[modIndex].append(modd[modIndex])
         modIndex +=1
@@ -49,7 +49,6 @@ print("" * 2)
 
 i = 0
 cardRotate = 0 #used to determine which player's turn it is
-cardPop = 0 
 
 heartsPlayed=[]
 clubsPlayed=[]
@@ -99,7 +98,8 @@ print("*" * 9)
 print("")
     
 ##HANDS NEED TO BE ROTATED SO THAT PLAYER AFTER 7H IS FIRST (e.g. IF PLAYER 3 PLAYS 7H, HANDS NEED TO BE ROTATED SO THAT PLAYER 4 IS FIRST (i.e. index 0)
-    
+
+cardPop = 0
 while cardPop <= handIndex:
     makeLast = playerHands.pop(0) #take first element off
     playerHands.append(makeLast)   #adds last element to end of playerHands
@@ -474,3 +474,23 @@ line 295 becomes true and 9H is added again
 #playableCards.remove('8D')
 #?
 #Good God, I really was just dumb.
+
+#Modifications made: see lines 354-361, 366-389
+
+##ON PASSING CARDS
+#if only one card in hand
+#just index 0
+
+#2 cards = 0 and 1
+
+#if 2 cards, pop index 1 
+
+#from line 294
+'''passCard = playerHands[-1].pop(2)  #Example: pops index 2 of last hand index
+print("Previous Player Passes:", passCard)'''
+
+#if len(playerHands[-1]) == 1:
+    #passCard=playerHands[-1].pop(1)
+    
+##ON SORTING
+#I could do heartsPlayed.sort(), etc. but 10 starts with '1' so it'll put 10 before 4
