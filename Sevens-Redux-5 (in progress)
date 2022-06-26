@@ -290,7 +290,7 @@ for i in range (len(playerHands)):
             print ("Diamonds: ", diamondsPlayed)
             print("" * 3)
         
-        #GETTING RID OF PLAYABLE CARDS THAT HAVE BEEN PLAYED (Needed just for 8s, apparently. Things get repeated after that See line 484)
+        #GETTING RID OF PLAYABLE CARDS THAT HAVE BEEN PLAYED (Needed just for 8s, apparently. Things get repeated after that See line 503)
         getRidofThis = 0
         
         while getRidofThis < len(playableCards):
